@@ -112,12 +112,10 @@ def updateTimer():
             timer.configure(text="00:00:00")
 
             if selected_option.get() == "shut":
-                #os.system("shutdown /s /t 1")
-                print("shutdown")
+                os.system("shutdown /s /t 1")
 
             if selected_option.get() == "sign":
-                #os.system("shutdown -l")
-                print("sign out")
+                os.system("shutdown -l")
 
             if selected_option.get() == "alarm":
                 print("coming soon")
