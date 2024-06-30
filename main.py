@@ -7,7 +7,8 @@ import os
 root = customtkinter.CTk()
 root.title("Timer")
 root.geometry("425x210")
-root
+customtkinter.set_default_color_theme("blue")
+customtkinter.set_appearance_mode("dark")
 
 root.columnconfigure((0,1,2), weight=1)
 
@@ -46,13 +47,16 @@ buttonWidth = 15
 buttonHeight = 15
 buttonChecked = 3
 
-shut = customtkinter.CTkRadioButton(option, text="Shutdown", variable=selected_option, value="shut", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked)
+shut = customtkinter.CTkRadioButton(option, text="Shutdown", variable=selected_option, value="shut", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked, border_width_unchecked=3, 
+                                    fg_color=["#3B8ED0", "#1F6AA5"], hover_color=["#36719F", "#144870"], text_color=["gray10", "#DCE4EE"], border_color=["#3E454A", "#949A9F"], text_color_disabled=["gray60", "gray45"], corner_radius=1000)
 shut.grid(row=0, padx=optionX)
 
-sign = customtkinter.CTkRadioButton(option, text="Sign Out", variable=selected_option, value="sign", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked)
+sign = customtkinter.CTkRadioButton(option, text="Sign Out", variable=selected_option, value="sign", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked, border_width_unchecked=3,
+                                    fg_color=["#3B8ED0", "#1F6AA5"], hover_color=["#36719F", "#144870"], text_color=["gray10", "#DCE4EE"], border_color=["#3E454A", "#949A9F"], text_color_disabled=["gray60", "gray45"], corner_radius=1000)
 sign.grid(row=1, padx=optionX)
 
-alarm = customtkinter.CTkRadioButton(option, text="Alarm", variable=selected_option, value="alarm", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked)
+alarm = customtkinter.CTkRadioButton(option, text="Alarm", variable=selected_option, value="alarm", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked, border_width_unchecked=3,
+                                    fg_color=["#3B8ED0", "#1F6AA5"], hover_color=["#36719F", "#144870"], text_color=["gray10", "#DCE4EE"], border_color=["#3E454A", "#949A9F"], text_color_disabled=["gray60", "gray45"], corner_radius=1000)
 alarm.grid(row=2, padx=optionX)
 
 totalSec = 0
@@ -89,9 +93,13 @@ def startTime():
     TimeStamp = datetime.strptime(f"""{timeNow.strftime("%m")}/{timeNow.strftime("%d")}/{timeNow.strftime("%Y")} {hourTime}:{minTime}:{secTime}""", "%m/%d/%Y %H:%M:%S")
     stopTime = False
 
-    mainButton.configure(text="Stop", command=stopTimer)
-    
-    updateTimer()
+
+    if hourTime == 0 and minTime == 0 and secTime == 0:
+        pass
+
+    else:
+        mainButton.configure(text="Stop", command=stopTimer)
+        updateTimer()
 
 def updateTimer():
     global totalSec
