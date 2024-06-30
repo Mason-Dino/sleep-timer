@@ -9,6 +9,7 @@ root.title("Timer")
 root.geometry("425x210")
 customtkinter.set_default_color_theme("blue")
 customtkinter.set_appearance_mode("dark")
+root.iconbitmap("logo.ico")
 
 root.columnconfigure((0,1,2), weight=1)
 
