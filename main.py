@@ -105,7 +105,7 @@ def updateTimer():
 
         timer.configure(text=TimeStamp.strftime("%H:%M:%S"))
 
-        repeat = root.after(100, updateTimer)
+        repeat = root.after(1000, updateTimer)
 
         if totalSec <= 0:
             root.after_cancel(repeat)
