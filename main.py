@@ -55,7 +55,86 @@ sign.grid(row=1, padx=optionX)
 alarm = customtkinter.CTkRadioButton(option, text="Alarm", variable=selected_option, value="alarm", font=("Arial", 12), radiobutton_width=buttonWidth, radiobutton_height=buttonHeight, border_width_checked=buttonChecked)
 alarm.grid(row=2, padx=optionX)
 
-start = customtkinter.CTkButton(workplace, text="Start")
-start.grid(row=2, column=1)
+totalSec = 0
+stopTime = True
+mainButton = None
+
+def startTime():
+    global totalSec
+    global TimeStamp
+    global stopTime
+
+    if h.get() == "":
+        hourTime = 0
+
+    else:
+        hourTime = int(h.get())
+
+    if m.get() == "":
+        minTime = 0
+
+    else:
+        minTime = int(m.get())
+
+    if s.get() == "":
+        secTime = 0
+
+    else:
+        secTime = int(s.get())
+
+    timer.configure(text=f"{hourTime:02}:{minTime:02}:{secTime:02}")
+
+    totalSec = (hourTime * 60 * 60) + (minTime * 60) + secTime
+    timeNow = datetime.now()
+    TimeStamp = datetime.strptime(f"""{timeNow.strftime("%m")}/{timeNow.strftime("%d")}/{timeNow.strftime("%Y")} {hourTime}:{minTime}:{secTime}""", "%m/%d/%Y %H:%M:%S")
+    stopTime = False
+
+    mainButton.configure(text="Stop", command=stopTimer)
+    
+    updateTimer()
+
+def updateTimer():
+    global totalSec
+    global TimeStamp
+    global stopTime
+
+    if stopTime == False:
+        totalSec -= 1
+
+        TimeStamp = TimeStamp - timedelta(seconds=1)
+
+        timer.configure(text=TimeStamp.strftime("%H:%M:%S"))
+
+        repeat = root.after(100, updateTimer)
+
+        if totalSec <= 0:
+            root.after_cancel(repeat)
+            timer.configure(text="00:00:00")
+
+            if selected_option.get() == "shut":
+                #os.system("shutdown /s /t 1")
+                print("shutdown")
+
+            if selected_option.get() == "sign":
+                #os.system("shutdown -l")
+                print("sign out")
+
+            if selected_option.get() == "alarm":
+                print("coming soon")
+
+def stopTimer():
+    global stopTime
+    global totalSec
+
+    stopTime = True
+
+    timer.configure(text="00:00:00")
+    totalSec = 5
+
+    mainButton.configure(text="Start", command=startTime)
+
+
+mainButton = customtkinter.CTkButton(workplace, text="Start", command=startTime)
+mainButton.grid(row=2, column=1)
 
 root.mainloop()
