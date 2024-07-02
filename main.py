@@ -1,5 +1,6 @@
 from datetime import *
 import customtkinter
+import winsound
 import time
 import os
 
@@ -127,7 +128,7 @@ def updateTimer():
                 os.system("shutdown -l")
 
             if selected_option.get() == "alarm":
-                print("coming soon")
+                winsound.PlaySound(r'alarm.wav', winsound.SND_ASYNC)
 
 def stopTimer():
     global stopTime
