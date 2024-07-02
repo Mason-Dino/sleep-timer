@@ -134,7 +134,7 @@ def updateTimer():
                 #winsound.PlaySound(r'alarm.wav', winsound.SND_ASYNC)
 
                 pygame.mixer.init()
-                sounda= pygame.mixer.Sound("alarm.wav")
+                sounda= pygame.mixer.Sound("alarm.mp3")
                 sounda.play()   
 
 def stopTimer():
