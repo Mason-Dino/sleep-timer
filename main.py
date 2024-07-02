@@ -1,6 +1,7 @@
 from datetime import *
 import customtkinter
 import winsound
+import pygame
 import time
 import os
 
@@ -128,7 +129,13 @@ def updateTimer():
                 os.system("shutdown -l")
 
             if selected_option.get() == "alarm":
-                winsound.PlaySound(r'alarm.wav', winsound.SND_ASYNC)
+                #2 option for how to play the audio
+
+                #winsound.PlaySound(r'alarm.wav', winsound.SND_ASYNC)
+
+                pygame.mixer.init()
+                sounda= pygame.mixer.Sound("alarm.wav")
+                sounda.play()   
 
 def stopTimer():
     global stopTime
