@@ -154,8 +154,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-#PSD Files
+#Msic
 *.psd
+*.iss
+Output/*
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
